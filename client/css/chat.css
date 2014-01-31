@@ -1,0 +1,10 @@
+.chat-container {
+    margin-top: 50px;
+    width: 600px;
+}
+
+.chat-messages {
+    height: 300px;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
