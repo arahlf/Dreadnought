@@ -1,37 +1,82 @@
-
 <!doctype html>
-<html ng-app="Dreadnought">
+<html>
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
-
-    <script src="client/js/ChatController.js"></script>
-    <script src="client/js/AutoScroll.js"></script>
-
-    <link rel="stylesheet" href="client/css/chat.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <meta charset="UTF-8">
+    <title>Dreadnought</title>
   </head>
-  <body>
-    <div ng-controller="ChatController">
-      <div class="center-block chat-container">
-
-        <div class="panel panel-default">
-          <div class="panel-body chat-messages" auto-scroll="messages">
-            <div ng-repeat="message in messages track by $index">{{message}}</div>
-          </div>
-        </div>
-
-        <form ng-submit="sendMessage()">
-          <div class="input-group">
-            <input type="text" ng-model="message" name="message" class="form-control" placeholder="Enter a message" autofocus autocomplete="off">
-            <span class="input-group-btn">
-              <input type="submit" class="btn btn-default" value="Send">
-            </span>
-          </div>
-        </form>
-
-      </div>
-
+  <body onload="init();">
+    <div align="center">
+      <canvas id="game-canvas" style="border: 1px solid #000" width="600" height="400"></canvas>
     </div>
+
+    <script src="./lib/pixi.dev.js"></script>
+    <script>
+      function init() {
+
+        var createMenuOptionText = function(text) {
+            var styles = { font: '20px Verdana' };
+            var text = new PIXI.Text(text, styles);
+            var leftBrace = new PIXI.Text('[', styles);
+            var rightBrace = new PIXI.Text(']', styles);
+
+            leftBrace.visible = rightBrace.visible = false;
+
+            leftBrace.x = -10 - leftBrace.width;
+            rightBrace.x = text.width + 10;
+
+            text.interactive = true;
+
+            text.addChild(leftBrace);
+            text.addChild(rightBrace);
+
+            text.mouseover = function() {
+                leftBrace.visible = rightBrace.visible = true;
+            };
+
+            text.mouseout = function() {
+                leftBrace.visible = rightBrace.visible = false;
+            };
+
+            return text;
+        };
+
+        var WIDTH = 600;
+        var HEIGHT = 400;
+
+        stage = new PIXI.Stage(0xF5F5F5, true);
+
+        var title = new PIXI.Text("Dreadnought", { font: '35px Verdana' });
+        title.x = Math.round((WIDTH / 2) - (title.width / 2));
+        title.y = 75;
+
+        stage.addChild(title);
+
+        var play = createMenuOptionText('play');
+        play.x = Math.round((WIDTH / 2) - (play.width / 2));
+        play.y = 175;
+
+        var settings = createMenuOptionText('settings');
+        settings.x = Math.round((WIDTH / 2) - (settings.width / 2));
+        settings.y = 215;
+
+        var about = createMenuOptionText('about');
+        about.x = Math.round((WIDTH / 2) - (about.width / 2));
+        about.y = 255;
+
+        stage.addChild(play);
+        stage.addChild(settings);
+        stage.addChild(about);
+
+        renderer = PIXI.autoDetectRenderer(WIDTH, HEIGHT, document.getElementById("game-canvas"));
+
+        var update = function() {
+            renderer.render(stage);
+
+            requestAnimFrame(update);
+        };
+
+        requestAnimFrame(update);
+      }
+    </script>
   </body>
 </html>
