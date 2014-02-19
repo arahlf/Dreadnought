@@ -5,71 +5,34 @@
     <title>Dreadnought</title>
   </head>
   <body onload="init();">
-    <div align="center">
-      <canvas id="game-canvas" style="border: 1px solid #000" width="600" height="400"></canvas>
-    </div>
+    <div align="center" id="game-container"></div>
 
     <script src="./lib/pixi.dev.js"></script>
+
+    <script src="./client/js/Dnt.js"></script>
+    <script src="./client/js/SceneManager.js"></script>
+    <script src="./client/js/Scene.js"></script>
+    <script src="./client/js/IntroScene.js"></script>
+    <script src="./client/js/GameScene.js"></script>
+
     <script>
       function init() {
 
-        var createMenuOptionText = function(text) {
-            var styles = { font: '20px Verdana' };
-            var text = new PIXI.Text(text, styles);
-            var leftBrace = new PIXI.Text('[', styles);
-            var rightBrace = new PIXI.Text(']', styles);
+        var stage = new PIXI.Stage(0xF5F5F5, true);
 
-            leftBrace.visible = rightBrace.visible = false;
+        var renderer = PIXI.autoDetectRenderer(Dnt.WIDTH, Dnt.HEIGHT);
+        renderer.view.style.border = '1px solid #000';
 
-            leftBrace.x = -10 - leftBrace.width;
-            rightBrace.x = text.width + 10;
+        document.getElementById('game-container').appendChild(renderer.view);
 
-            text.interactive = true;
+        var sceneManager = new Dnt.SceneManager(stage);
+        var introScene = new Dnt.IntroScene(sceneManager);
 
-            text.addChild(leftBrace);
-            text.addChild(rightBrace);
-
-            text.mouseover = function() {
-                leftBrace.visible = rightBrace.visible = true;
-            };
-
-            text.mouseout = function() {
-                leftBrace.visible = rightBrace.visible = false;
-            };
-
-            return text;
-        };
-
-        var WIDTH = 600;
-        var HEIGHT = 400;
-
-        stage = new PIXI.Stage(0xF5F5F5, true);
-
-        var title = new PIXI.Text("Dreadnought", { font: '35px Verdana' });
-        title.x = Math.round((WIDTH / 2) - (title.width / 2));
-        title.y = 75;
-
-        stage.addChild(title);
-
-        var play = createMenuOptionText('play');
-        play.x = Math.round((WIDTH / 2) - (play.width / 2));
-        play.y = 175;
-
-        var settings = createMenuOptionText('settings');
-        settings.x = Math.round((WIDTH / 2) - (settings.width / 2));
-        settings.y = 215;
-
-        var about = createMenuOptionText('about');
-        about.x = Math.round((WIDTH / 2) - (about.width / 2));
-        about.y = 255;
-
-        stage.addChild(play);
-        stage.addChild(settings);
-        stage.addChild(about);
-
-        renderer = PIXI.autoDetectRenderer(WIDTH, HEIGHT, document.getElementById("game-canvas"));
+        sceneManager.setActiveScene(introScene);
 
         var update = function() {
+            sceneManager.update();
+
             renderer.render(stage);
 
             requestAnimFrame(update);
