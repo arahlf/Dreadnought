@@ -21,6 +21,7 @@ describe('Dnt.define', function(){
         },
         baz: function() {
             output.push('a#baz');
+            return 'a#baz';
         },
         yikes: function() {
             this.callParent();
@@ -54,8 +55,9 @@ describe('Dnt.define', function(){
             output.push('c#foo');
         },
         baz: function() {
-            this.callParent();
+            var originalBaz = this.callParent();
             output.push('c#baz');
+            return originalBaz + '-' + 'c#baz';
         }
     });
 
@@ -88,5 +90,11 @@ describe('Dnt.define', function(){
         var yikes = c.yikes.bind(c);
         
         yikes.should.throw(/No parent class method found for/);
+    });
+
+    it('callParent should return the original value', function() {
+        var c = new Foo.bar.C();
+
+        c.baz().should.equal('a#baz-c#baz');
     });
 });

@@ -12,7 +12,7 @@
             throw new Error('No parent class method found for ' + method.$owner.$className + '#' + method.$name);
         }
 
-        parentClassMethod.apply(this, args);
+        return parentClassMethod.apply(this, args);
     };
 
 
