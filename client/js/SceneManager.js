@@ -1,23 +1,23 @@
-Dnt.SceneManager = function(stage) {
-    this.stage = stage;
-    this.activeScene = null;
-}
+Dnt.define('Dnt.SceneManager', {
 
-Dnt.SceneManager.prototype.constructor = Dnt.SceneManager;
+    constructor: function(stage) {
+        this.stage = stage;
+        this.activeScene = null;
+    },
 
+    setActiveScene: function(scene) {
+        if (this.activeScene) {
+            this.stage.removeChild(this.activeScene.getSceneContents());
+        }
 
-Dnt.SceneManager.prototype.setActiveScene = function(scene) {
-    if (this.activeScene) {
-        this.stage.removeChild(this.activeScene.getSceneContents());
+        this.stage.addChild(scene.getSceneContents());
+
+        this.activeScene = scene;
+    },
+
+    update: function() {
+        if (this.activeScene) {
+            this.activeScene.update();
+        }
     }
-
-    this.stage.addChild(scene.getSceneContents());
-
-    this.activeScene = scene;
-};
-
-Dnt.SceneManager.prototype.update = function() {
-    if (this.activeScene) {
-        this.activeScene.update();
-    }
-};
+});

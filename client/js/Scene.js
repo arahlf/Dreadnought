@@ -1,10 +1,14 @@
 
-Dnt.Scene = function() {
+Dnt.define('Dnt.Scene', {
 
-}
+    constructor: function(sceneManager) {
+        this.sceneManager = sceneManager;
+        this.displayObjectContainer = new PIXI.DisplayObjectContainer();
+    },
 
-Dnt.Scene.prototype.constructor = Dnt.Scene;
+    getSceneContents: function() {
+        return this.displayObjectContainer;
+    },
 
-Dnt.Scene.prototype.getSceneContents = function() {};
-
-Dnt.Scene.prototype.update = function() {};
+    update: Dnt.abstractFn
+});
