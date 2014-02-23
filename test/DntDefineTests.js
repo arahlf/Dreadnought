@@ -25,7 +25,8 @@ describe('Dnt.define', function(){
         },
         yikes: function() {
             this.callParent();
-        }
+        },
+        run: Dnt.abstractFn
     });
 
     Dnt.define('Foo.bar.B', Foo.bar.A, {
@@ -85,6 +86,12 @@ describe('Dnt.define', function(){
         c.c.should.equal('3');
     })
 
+    it('callParent should return the original value', function() {
+        var c = new Foo.bar.C();
+
+        c.baz().should.equal('a#baz-c#baz');
+    });
+
     it('should give a helpful error message, maybe?', function() {
         var c = new Foo.bar.C();
         var yikes = c.yikes.bind(c);
@@ -92,9 +99,10 @@ describe('Dnt.define', function(){
         yikes.should.throw(/No parent class method found for/);
     });
 
-    it('callParent should return the original value', function() {
+    it('should throw an error if abstract methods are not implemented', function() {
         var c = new Foo.bar.C();
+        var run = c.run.bind(c);
 
-        c.baz().should.equal('a#baz-c#baz');
+        run.should.throw('Foo.bar.C#run not implemented');
     });
 });

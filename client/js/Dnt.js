@@ -22,7 +22,7 @@
         HEIGHT: 400,
 
         abstractFn: function() {
-            throw new Error('Dnt.abstractFn called directly.');
+            throw new Error(this.$className + '#' + arguments.callee.$name + ' not implemented');
         },
 
         define: function(className, parentClass, members) {
