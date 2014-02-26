@@ -1,4 +1,4 @@
-Dnt.define('Dnt.GameScene', Dnt.Scene, {
+Dread.define('Dread.GameScene', Dread.Scene, {
 
     constructor: function(sceneManager) {
         this.callParent(arguments);

@@ -1,9 +1,9 @@
 
-describe('Dnt Tests', function() {
+describe('Dread Tests', function() {
 
     describe('#define', function(){
 
-        var fixture = new DntTests.DntDefineTestFixture();
+        var fixture = new DreadTests.DreadTestFixture();
         var output = fixture.output;
         var c;
 
@@ -37,8 +37,8 @@ describe('Dnt Tests', function() {
         });
 
         it('should provide a class meta data', function() {
-            c.$className.should.equal('DntTests.DntDefineTestFixture.ClassC');
-            c.$parentClass.should.equal(DntTests.DntDefineTestFixture.ClassB);
+            c.$className.should.equal('DreadTests.DreadTestFixture.ClassC');
+            c.$parentClass.should.equal(DreadTests.DreadTestFixture.ClassB);
         });
 
         it('should throw an error message when callParent is executed but parent method does not exist', function() {

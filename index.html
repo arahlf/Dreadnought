@@ -9,7 +9,7 @@
 
     <script src="./lib/pixi.dev.js"></script>
 
-    <script src="./client/js/Dnt.js"></script>
+    <script src="./client/js/Dread.js"></script>
     <script src="./client/js/SceneManager.js"></script>
     <script src="./client/js/Scene.js"></script>
     <script src="./client/js/IntroScene.js"></script>
@@ -20,13 +20,13 @@
 
         var stage = new PIXI.Stage(0xF5F5F5, true);
 
-        var renderer = PIXI.autoDetectRenderer(Dnt.WIDTH, Dnt.HEIGHT);
+        var renderer = PIXI.autoDetectRenderer(Dread.WIDTH, Dread.HEIGHT);
         renderer.view.style.border = '1px solid #000';
 
         document.getElementById('game-container').appendChild(renderer.view);
 
-        var sceneManager = new Dnt.SceneManager(stage);
-        var introScene = new Dnt.IntroScene(sceneManager);
+        var sceneManager = new Dread.SceneManager(stage);
+        var introScene = new Dread.IntroScene(sceneManager);
 
         sceneManager.setActiveScene(introScene);
 

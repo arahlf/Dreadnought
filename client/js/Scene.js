@@ -1,5 +1,5 @@
 
-Dnt.define('Dnt.Scene', {
+Dread.define('Dread.Scene', {
 
     constructor: function(sceneManager) {
         this.sceneManager = sceneManager;
@@ -10,5 +10,5 @@ Dnt.define('Dnt.Scene', {
         return this.displayObjectContainer;
     },
 
-    update: Dnt.abstractFn
+    update: Dread.abstractFn
 });

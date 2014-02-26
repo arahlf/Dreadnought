@@ -1,10 +1,10 @@
 (function() {
 
-    function DntBaseClass() {}
+    function DreadBaseClass() {}
 
-    DntBaseClass.prototype.constructor = function() {};
+    DreadBaseClass.prototype.constructor = function() {};
 
-    DntBaseClass.prototype.callParent = function(args) {
+    DreadBaseClass.prototype.callParent = function(args) {
         var method = arguments.callee.caller;
         var parentClassMethod = method.$owner.$parentClass.prototype[method.$name];
 
@@ -16,7 +16,7 @@
     };
 
 
-    window.Dnt = {
+    window.Dread = {
 
         WIDTH: 600,
         HEIGHT: 400,
@@ -29,7 +29,7 @@
 
             if (arguments.length == 2) {
                 members = parentClass;
-                parentClass = DntBaseClass;
+                parentClass = DreadBaseClass;
             }
 
             var namespaces = className.split('.');

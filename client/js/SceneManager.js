@@ -1,4 +1,4 @@
-Dnt.define('Dnt.SceneManager', {
+Dread.define('Dread.SceneManager', {
 
     constructor: function(stage) {
         this.stage = stage;

@@ -1,10 +1,10 @@
 
-DntTests.DntDefineTestFixture = function() {
+DreadTests.DreadTestFixture = function() {
 
     var output = [];
 
     // some class definitions that are used throughout the tests
-    Dnt.define('DntTests.DntDefineTestFixture.ClassA', {
+    Dread.define('DreadTests.DreadTestFixture.ClassA', {
         constructor: function(a) {
             output.push('a#constructor');
             this.a = a;
@@ -22,10 +22,10 @@ DntTests.DntDefineTestFixture = function() {
         yikes: function() {
             this.callParent();
         },
-        run: Dnt.abstractFn
+        run: Dread.abstractFn
     });
 
-    Dnt.define('DntTests.DntDefineTestFixture.ClassB', DntTests.DntDefineTestFixture.ClassA, {
+    Dread.define('DreadTests.DreadTestFixture.ClassB', DreadTests.DreadTestFixture.ClassA, {
         constructor: function(a, b) {
             this.callParent([a]);
             output.push('b#constructor');
@@ -41,7 +41,7 @@ DntTests.DntDefineTestFixture = function() {
         }
     });
 
-    Dnt.define('DntTests.DntDefineTestFixture.ClassC', DntTests.DntDefineTestFixture.ClassB, {
+    Dread.define('DreadTests.DreadTestFixture.ClassC', DreadTests.DreadTestFixture.ClassB, {
         constructor: function(a, b, c) {
             this.callParent([a, b]);
             output.push('c#constructor');
@@ -58,9 +58,9 @@ DntTests.DntDefineTestFixture = function() {
         }
     });
 
-    this.ClassA = DntTests.DntDefineTestFixture.ClassA;
-    this.ClassB = DntTests.DntDefineTestFixture.ClassB;
-    this.ClassC = DntTests.DntDefineTestFixture.ClassC;
+    this.ClassA = DreadTests.DreadTestFixture.ClassA;
+    this.ClassB = DreadTests.DreadTestFixture.ClassB;
+    this.ClassC = DreadTests.DreadTestFixture.ClassC;
 
     this.output = output;
 }
